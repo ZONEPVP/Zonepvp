@@ -41,6 +41,17 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        .forum-post {
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+        }
+        .forum-post:hover {
+            border-left-color: #3B82F6;
+            transform: translateX(5px);
+        }
+        #newThreadForm {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -57,6 +68,7 @@
                 <button onclick="changeTab('home')" class="tab-btn px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Inicio</button>
                 <button onclick="changeTab('appeal')" class="tab-btn px-4 py-2 rounded-lg hover:bg-gray-700 transition">Apelación</button>
                 <button onclick="changeTab('rules')" class="tab-btn px-4 py-2 rounded-lg hover:bg-gray-700 transition">Reglas</button>
+                <button onclick="changeTab('forum')" class="tab-btn px-4 py-2 rounded-lg hover:bg-gray-700 transition">Foro</button>
             </nav>
         </div>
     </header>
@@ -188,6 +200,82 @@
                 </div>
             </section>
         </div>
+
+        <!-- Forum Tab -->
+        <div id="forum" class="tab-content">
+            <section class="max-w-3xl mx-auto bg-gray-800 rounded-lg p-6">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400 border-b border-gray-700 pb-2">FORO DE ZONEPVP</h2>
+                
+                <!-- Formulario para nuevo hilo -->
+                <form id="threadForm" class="mb-8 bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400">
+                        <i class="fas fa-plus-circle mr-2"></i>Crear nuevo hilo
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="mcUsername" class="block mb-2 font-medium">Nombre de Minecraft*</label>
+                            <input 
+                                type="text" 
+                                id="mcUsername" 
+                                class="w-full bg-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                required
+                                placeholder="Tu nombre en el servidor"
+                            >
+                        </div>
+                        <div>
+                            <label for="threadCategory" class="block mb-2 font-medium">Modalidad*</label>
+                            <select 
+                                id="threadCategory" 
+                                class="w-full bg-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                required
+                            >
+                                <option value="">Seleccione una modalidad</option>
+                                <option value="arenapvp">ARENAPVP</option>
+                                <option value="survival">SURVIVAL</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="threadTitle" class="block mb-2 font-medium">Título del hilo*</label>
+                        <input 
+                            type="text" 
+                            id="threadTitle" 
+                            class="w-full bg-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            required
+                            placeholder="Ej: Problemas con el lag en ARENAPVP"
+                        >
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="threadContent" class="block mb-2 font-medium">Contenido*</label>
+                        <textarea 
+                            id="threadContent" 
+                            rows="4" 
+                            class="w-full bg-gray-600 rounded-lg py-2 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            required
+                            placeholder="Describe tu hilo aquí..."
+                        ></textarea>
+                    </div>
+                    
+                    <button 
+                        type="submit" 
+                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg"
+                    >
+                        <i class="fas fa-paper-plane mr-2"></i>Publicar hilo
+                    </button>
+                </form>
+                
+                <!-- Lista de hilos (vacía inicialmente) -->
+                <div id="threadsList">
+                    <div class="text-center py-8 text-gray-400">
+                        <i class="fas fa-comments text-4xl mb-3"></i>
+                        <p>Aún no hay hilos creados. ¡Sé el primero en publicar!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
     <!-- JavaScript para cambiar pestañas -->
@@ -213,7 +301,54 @@
                 activeBtn.classList.remove('hover:bg-gray-700');
             }
         }
+
+        // Manejar envío del formulario
+        document.getElementById('threadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obtener valores del formulario
+            const username = document.getElementById('mcUsername').value;
+            const category = document.getElementById('threadCategory').value;
+            const title = document.getElementById('threadTitle').value;
+            const content = document.getElementById('threadContent').value;
+            
+            // Validación rápida
+            if (!username || !category || !title || !content) {
+                alert('Por favor complete todos los campos obligatorios');
+                return;
+            }
+            
+            // Crear estructura del hilo (simulación)
+            const threadHTML = `
+                <div class="forum-post bg-gray-800 p-4 border-b border-gray-700 cursor-pointer">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-lg text-white">${title}</h3>
+                        <span class="text-sm text-gray-400">
+                            ${category === 'arenapvp' ? '<i class="fas fa-swords mr-1"></i>ARENAPVP' : '<i class="fas fa-tree mr-1"></i>SURVIVAL'}
+                        </span>
+                    </div>
+                    <p class="text-gray-300 mb-3">${content}</p>
+                    <div class="flex justify-between text-sm text-gray-400">
+                        <span><i class="fas fa-user mr-1"></i>${username}</span>
+                        <span>Hace unos momentos</span>
+                    </div>
+                </div>
+            `;
+            
+            // Actualizar la lista de hilos
+            const threadsList = document.getElementById('threadsList');
+            if (threadsList.innerHTML.includes('Aún no hay hilos')) {
+                threadsList.innerHTML = threadHTML;
+            } else {
+                threadsList.insertAdjacentHTML('afterbegin', threadHTML);
+            }
+            
+            // Limpiar formulario
+            this.reset();
+            
+            // Mostrar mensaje de éxito
+            alert('¡Hilo creado con éxito!');
+        });
     </script>
 </body>
 </html>
-
