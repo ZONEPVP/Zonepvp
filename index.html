@@ -1,1 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZONEPVP - Servidor de Minecraft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Minecraft&display=swap');
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Arial', sans-serif;
+        }
+        .minecraft-font {
+            font-family: 'Minecraft', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+        }
+        .diamond-shape {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        .discord-btn {
+            background-color: #5865F2;
+            transition: all 0.3s;
+        }
+        .discord-btn:hover {
+            background-color: #4752C4;
+            transform: translateY(-2px);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg py-6 border-b-4 border-blue-500">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="diamond-shape bg-blue-500 w-12 h-12 flex items-center justify-center mr-3">
+                    <i class="fas fa-diamond text-white text-xl"></i>
+                </div>
+                <h1 class="text-3xl font-bold text-white minecraft-font">ZONEPVP</h1>
+            </div>
+            <nav class="flex space-x-1 md:space-x-4">
+                <button onclick="changeTab('home')" class="tab-btn px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">Inicio</button>
+                <button onclick="changeTab('appeal')" class="tab-btn px-4 py-2 rounded-lg hover:bg-gray-700 transition">Apelación</button>
+                <button onclick="changeTab('rules')" class="tab-btn px-4 py-2 rounded-lg hover:bg-gray-700 transition">Reglas</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <section class="mb-12 text-center">
+                <h2 class="text-4xl font-bold mb-6 text-blue-400 minecraft-font">BIENVENIDO A ZONEPVP</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">Servidor de Minecraft con ARENAPVP y SURVIVAL. ¡Únete a la diversión!</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto">
+                    <!-- ArenaPvP Card -->
+                    <div class="bg-gray-800 p-6 rounded-lg hover:shadow-lg cursor-pointer">
+                        <div class="bg-red-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-swords text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-red-400">ARENAPVP</h3>
+                        <p class="text-gray-300">Combates emocionantes donde puedes demostrar tus habilidades.</p>
+                    </div>
+                    
+                    <!-- Survival Card -->
+                    <div class="bg-gray-800 p-6 rounded-lg hover:shadow-lg cursor-pointer">
+                        <div class="bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tree text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2 text-green-400">SURVIVAL</h3>
+                        <p class="text-gray-300">Explora, construye y sobrevive en un mundo lleno de posibilidades.</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-lg p-6 max-w-4xl mx-auto mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-yellow-400">IP DEL SERVIDOR</h3>
+                    <div class="bg-black p-4 rounded-lg mb-4">
+                        <code class="text-green-400 text-xl">zonepvp.aternos.me</code>
+                    </div>
+                    <p class="text-sm text-gray-400">Nota: El servidor está en Aternos, puede que no esté siempre online.</p>
+                </div>
+
+                <!-- Discord Button -->
+                <div class="bg-gray-800 rounded-lg p-6 max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-300">ÚNETE A NUESTRO DISCORD</h3>
+                    <a href="https://discord.gg/PSkPEcpc" target="_blank" class="discord-btn text-white font-bold py-3 px-6 rounded-lg inline-flex items-center justify-center">
+                        <i class="fab fa-discord mr-2 text-2xl"></i> UNIRME AL DISCORD
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Appeal Tab -->
+        <div id="appeal" class="tab-content">
+            <section class="max-w-3xl mx-auto bg-gray-800 rounded-lg p-6">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400 border-b border-gray-700 pb-2">APELACIÓN DE BANEO</h2>
+                
+                <div class="mb-6 p-4 bg-gray-700 rounded-lg">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-400">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>¿Fuiste baneado permanentemente?
+                    </h3>
+                    <p class="text-gray-300 mb-4">
+                        Si recibiste un <strong class="text-red-400">baneo permanente</strong> y deseas apelar, sigue estos pasos:
+                    </p>
+                    
+                    <ol class="list-decimal pl-5 space-y-2 text-gray-300">
+                        <li>Únete a nuestro <a href="https://discord.gg/PSkPEcpc" target="_blank" class="text-blue-400 hover:underline">Discord</a>.</li>
+                        <li>Abre un <strong class="text-green-400">ticket</strong> en la sección de soporte.</li>
+                        <li>Explica tu caso con honestidad.</li>
+                    </ol>
+                </div>
+                
+                <div class="p-4 bg-gray-700 rounded-lg">
+                    <h3 class="text-xl font-bold mb-2 text-red-400">
+                        <i class="fas fa-ban mr-2"></i> IMPORTANTE
+                    </h3>
+                    <p class="text-gray-300">
+                        ❌ <strong>Los baneos temporales NO se apelan</strong>.<br>
+                        ⏳ Espera a que termine el tiempo de tu sanción.
+                    </p>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <a href="https://discord.gg/PSkPEcpc" target="_blank" class="discord-btn text-white font-bold py-3 px-6 rounded-lg inline-block">
+                        <i class="fab fa-discord mr-2"></i> APELAR EN DISCORD
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Rules Tab -->
+        <div id="rules" class="tab-content">
+            <section class="max-w-3xl mx-auto bg-gray-800 rounded-lg p-6">
+                <h2 class="text-3xl font-bold mb-6 text-blue-400 border-b border-gray-700 pb-2">REGLAS DEL SERVIDOR</h2>
+                
+                <div class="space-y-6">
+                    <!-- Prohibiciones -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <h3 class="text-xl font-bold mb-2 text-red-400">
+                            <i class="fas fa-ban mr-2"></i> Prohibiciones
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                            <li>No usar hacks, mods no permitidos o cualquier tipo de trampa.</li>
+                            <li>No hacer spam, flood o insultar a otros jugadores.</li>
+                            <li>No evadir baneos con cuentas alternativas.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Conducta -->
+                    <div class="border-b border-gray-700 pb-4">
+                        <h3 class="text-xl font-bold mb-2 text-green-400">
+                            <i class="fas fa-check-circle mr-2"></i> Conducta
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                            <li>Respeta a todos los jugadores y staff.</li>
+                            <li>Reporta bugs o problemas a los administradores.</li>
+                            <li>Disfruta y ayuda a mantener un buen ambiente.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Sanciones -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-2 text-yellow-400">
+                            <i class="fas fa-gavel mr-2"></i> Sanciones
+                        </h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-300">
+                            <li>Las infracciones pueden resultar en mute, kick o ban temporal/permanente.</li>
+                            <li>Solo se apelan <strong>baneos permanentes</strong> mediante Discord.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript para cambiar pestañas -->
+    <script>
+        function changeTab(tabId) {
+            // Oculta todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Muestra el contenido seleccionado
+            document.getElementById(tabId).classList.add('active');
+            
+            // Actualiza el estilo de los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('hover:bg-gray-700');
+            });
+            
+            // Resalta el botón activo
+            const activeBtn = document.querySelector(`button[onclick="changeTab('${tabId}')"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-blue-600', 'text-white');
+                activeBtn.classList.remove('hover:bg-gray-700');
+            }
+        }
+    </script>
+</body>
+</html>
 
