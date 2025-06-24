@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro ZONEPVP | Registro Requerido</title>
+    <style>
+        :root {
+            --mc-orange: #FFAA00;
+            --mc-dark-orange: #8B5A00;
+            --mc-green: #55FF55;
+            --mc-red: #FF5555;
+            --mc-dark: #0C0C0C;
+            --mc-gray: #555555;
+            --discord-blurple: #5865F2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Minecraft', sans-serif;
+        }
+        
+        body {
+            background-color: var(--mc-dark);
+            background-image: url('https://www.minecraft.net/content/dam/minecraft/touchup-2020/minecraft-background-logged-in.jpg');
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 3px solid var(--mc-orange);
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            color: var(--mc-orange);
+            text-shadow: 3px 3px 0 var(--mc-dark-orange);
+        }
+        
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .auth-form {
+            background: rgba(20,20,20,0.9);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--mc-gray);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            color: var(--mc-orange);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--mc-orange);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--mc-gray);
+            color: white;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .form-submit {
+            background: var(--mc-orange);
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+        }
+        
+        .form-submit:hover {
+            background: white;
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 15px;
+            color: #AAA;
+        }
+        
+        .form-switch-btn {
+            background: none;
+            border: none;
+            color: var(--mc-orange);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .forum-content {
+            display: none;
+        }
+        
+        .category {
+            background: rgba(20,20,20,0.8);
+            border: 2px solid var(--mc-gray);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            background: rgba(255,170,0,0.1);
+            padding: 15px 20px;
+            border-bottom: 2px solid var(--mc-orange);
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+            color: var(--mc-orange);
+        }
+        
+        .threads-list {
+            padding: 15px;
+        }
+        
+        .thread {
+            padding: 15px;
+            margin-bottom: 15px;
+            background: rgba(30,30,30,0.6);
+            border-left: 3px solid var(--mc-gray);
+        }
+        
+        .thread-title {
+            font-size: 1.4rem;
+            color: white;
+            margin-bottom: 5px;
+        }
+        
+        .thread-meta {
+            display: flex;
+            color: #AAA;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .thread-author {
+            color: var(--mc-green);
+            margin-right: 15px;
+        }
+        
+        .new-thread-btn {
+            background: var(--mc-dark-orange);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            transition: all 0.3s;
+        }
+        
+        .new-thread-btn:hover {
+            background: var(--mc-orange);
+        }
+        
+        .new-thread-form {
+            display: none;
+            background: rgba(20,20,20,0.9);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border: 2px solid var(--mc-gray);
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--mc-gray);
+            color: white;
+            border-radius: 5px;
+            font-family: inherit;
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 2px solid var(--mc-gray);
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .auth-form {
+                width: 100%;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">FORO ZONEPVP</h1>
+            <p>Registro requerido para participar</p>
+        </header>
+        
+        <!-- Contenedor de autenticación (visible inicialmente) -->
+        <div class="auth-container" id="auth-container">
+            <!-- Formulario de Registro -->
+            <div class="auth-form" id="register-form">
+                <h2 class="form-title">REGISTRARSE</h2>
+                <div class="form-group">
+                    <label class="form-label">Nombre de Usuario:</label>
+                    <input type="text" class="form-input" id="reg-username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-input" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contraseña:</label>
+                    <input type="password" class="form-input" id="reg-password" required>
+                </div>
+                <button class="form-submit" onclick="registerUser()">CREAR CUENTA</button>
+                <div class="form-switch">
+                    ¿Ya tienes cuenta? <button class="form-switch-btn" onclick="showLoginForm()">Iniciar Sesión</button>
+                </div>
+            </div>
+            
+            <!-- Formulario de Login (oculto inicialmente) -->
+            <div class="auth-form" id="login-form" style="display:none;">
+                <h2 class="form-title">INICIAR SESIÓN</h2>
+                <div class="form-group">
+                    <label class="form-label">Correo Electrónico:</label>
+                    <input type="email" class="form-input" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contraseña:</label>
+                    <input type="password" class="form-input" id="login-password" required>
+                </div>
+                <button class="form-submit" onclick="loginUser()">ENTRAR</button>
+                <div class="form-switch">
+                    ¿No tienes cuenta? <button class="form-switch-btn" onclick="showRegisterForm()">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Contenido del foro (oculto inicialmente) -->
+        <div class="forum-content" id="forum-content">
+            <div class="category">
+                <div class="category-header">
+                    <h2 class="category-title">DISCUSIONES RECIENTES</h2>
+                </div>
+                <div class="threads-list" id="threads-list">
+                    <!-- Los hilos se cargarán aquí mediante JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Botón para crear nuevo hilo (solo visible cuando el usuario está logueado) -->
+            <button class="new-thread-btn" id="new-thread-btn" onclick="showNewThreadForm()">
+                <i class="fas fa-plus"></i> CREAR NUEVO HILO
+            </button>
+            
+            <!-- Formulario para nuevo hilo (oculto inicialmente) -->
+            <div class="new-thread-form" id="new-thread-form">
+                <h2 class="form-title">NUEVO HILO</h2>
+                <div class="form-group">
+                    <label class="form-label">Título:</label>
+                    <input type="text" class="form-input" id="thread-title" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Contenido:</label>
+                    <textarea class="form-textarea" id="thread-content" required></textarea>
+                </div>
+                <button class="form-submit" onclick="createThread()">PUBLICAR</button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>ZONEPVP - Minecraft Server © 2025</p>
+            <p>No afiliado a Mojang o Microsoft</p>
+        </footer>
+    </div>
+
+    <script>
+        // Base de datos simulada en localStorage
+        let users = JSON.parse(localStorage.getItem('forumUsers')) || [];
+        let threads = JSON.parse(localStorage.getItem('forumThreads')) || [];
+        let currentUser = null;
+        
+        // Mostrar formulario de login
+        function showLoginForm() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+        
+        // Mostrar formulario de registro
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+        
+        // Registrar nuevo usuario
+        function registerUser() {
+            const username = document.getElementById('reg-username').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            
+            if (!username || !email || !password) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            // Verificar si el email ya está registrado
+            if (users.some(user => user.email === email)) {
+                alert('Este correo ya está registrado');
+                return;
+            }
+            
+            // Crear nuevo usuario
+            const newUser = {
+                id: Date.now().toString(),
+                username,
+                email,
+                password, // En una app real, esto debería estar hasheado
+                createdAt: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            localStorage.setItem('forumUsers', JSON.stringify(users));
+            
+            alert('Registro exitoso. Ahora puedes iniciar sesión.');
+            showLoginForm();
+        }
+        
+        // Iniciar sesión
+        function loginUser() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                localStorage.setItem('currentForumUser', JSON.stringify(user));
+                
+                // Mostrar el foro y ocultar los formularios de auth
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('forum-content').style.display = 'block';
+                document.getElementById('new-thread-btn').style.display = 'block';
+                
+                loadThreads();
+            } else {
+                alert('Credenciales incorrectas');
+            }
+        }
+        
+        // Cargar hilos del foro
+        function loadThreads() {
+            const threadsList = document.getElementById('threads-list');
+            threadsList.innerHTML = '';
+            
+            if (threads.length === 0) {
+                threadsList.innerHTML = '<p>No hay hilos todavía. ¡Sé el primero en publicar!</p>';
+                return;
+            }
+            
+            // Ordenar hilos por fecha (más recientes primero)
+            const sortedThreads = [...threads].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            
+            sortedThreads.forEach(thread => {
+                const threadElement = document.createElement('div');
+                threadElement.className = 'thread';
+                threadElement.innerHTML = `
+                    <h3 class="thread-title">${thread.title}</h3>
+                    <div class="thread-meta">
+                        <span class="thread-author">${thread.author}</span>
+                        <span>${new Date(thread.createdAt).toLocaleString()}</span>
+                    </div>
+                    <p class="thread-preview">${thread.content.substring(0, 150)}...</p>
+                `;
+                threadsList.appendChild(threadElement);
+            });
+        }
+        
+        // Mostrar formulario para nuevo hilo
+        function showNewThreadForm() {
+            document.getElementById('new-thread-form').style.display = 'block';
+            document.getElementById('new-thread-btn').style.display = 'none';
+        }
+        
+        // Crear nuevo hilo
+        function createThread() {
+            const title = document.getElementById('thread-title').value.trim();
+            const content = document.getElementById('thread-content').value.trim();
+            
+            if (!title || !content) {
+                alert('Por favor completa todos los campos');
+                return;
+            }
+            
+            const newThread = {
+                id: Date.now().toString(),
+                title,
+                content,
+                author: currentUser.username,
+                authorId: currentUser.id,
+                createdAt: new Date().toISOString(),
+                comments: []
+            };
+            
+            threads.push(newThread);
+            localStorage.setItem('forumThreads', JSON.stringify(threads));
+            
+            // Resetear y ocultar el formulario
+            document.getElementById('thread-title').value = '';
+            document.getElementById('thread-content').value = '';
+            document.getElementById('new-thread-form').style.display = 'none';
+            document.getElementById('new-thread-btn').style.display = 'block';
+            
+            // Recargar los hilos
+            loadThreads();
+        }
+        
+        // Verificar si hay usuario logueado al cargar la página
+        window.onload = function() {
+            const savedUser = localStorage.getItem('currentForumUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                document.getElementById('auth-container').style.display = 'none';
+                document.getElementById('forum-content').style.display = 'block';
+                loadThreads();
+            }
+        };
+    </script>
+</body>
+</html>
